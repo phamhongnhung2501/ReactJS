@@ -34,6 +34,23 @@ class Four extends React.Component {
     );
   }
 }               
+//  Sử dụng props cach 1
+function NumberOne(props){
+  return(
+    <div>
+      <div className="col-6">
+        <div className="card">
+          <img className="card-img-top" src="http://placehold.it/700x300" alt=""/>
+          <div className="card-body">
+            <h4 className="card-title"> Title </h4>
+            <p className="card-text"> Text </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (
