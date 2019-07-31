@@ -26,11 +26,11 @@ class HongNhungURL extends Component {
                         </ul>
 
                         <hr /> */}
-
+                        <Route exact path="/" component={Home} />
                         <Route exact path="/home" component={Home} />
-                        <Route path="/news" component={News} />
-                        <Route path="/new-news/:slug.:id.html" component={Detail} />
-                        <Route path="/contact" component={Contact} />
+                        <Route exact path="/news" component={News} />
+                        <Route exact path="/new-news/:slug.:id.html" component={Detail} />
+                        <Route exact path="/contact" component={Contact} />
                     </div>
                     
             </div>

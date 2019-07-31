@@ -19,9 +19,9 @@ class Nav extends Component {
                         <li>
                             <NavLink activeClassName="chon" to="/news">News</ NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to="/detail">Detail</ NavLink>
-                        </li>
+                        </li> */}
                         <li>
                             <NavLink to="/contact">Contact</ NavLink>
                         </li>

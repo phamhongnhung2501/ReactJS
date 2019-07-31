@@ -412,6 +412,7 @@ import data from './data.json';
 
 ```
 
+
 **Unit43:Xử lý phần NewsRelated Component**
 
 - b1: in ra danh sách các tin
@@ -548,3 +549,110 @@ var count = 1
 
 
 
+**Unit_45: Xử lý form gửi nhận dữ liệu với Redirect**
+
+- Tại sao phải "Xử lý form":
+
+- 1: Khi làm tương tác thì thường xuyên phải gửi nhận dữ liệu
+
+ví dụ làm 1 backend cho trang Zing thì cần cập nhật album mới, phải upload ảnh mới, khi tìm kiếm tên ca sĩ hay bài hát -> cần ấn nút "submit", gửi thông tin đi và mình nhận được thông tin thì lúc đó mới insert vào cơ sở dữ liệu
+
+---> 90% thao tác trong backend là xử lý với form
+
+---> cho nên cần nắm được cái form đấy để biết được việc gửi ntn, gửi 1 cái checkbox thì nhận ntn, gửi 1 select hay 1 input thì nhận ntn, file bằng text thì nhận ntn và check ntn. 
+
+- 2: Làm như thế nào:
+
+b1: Redirict ( trong trang contact cần làm khi mà submit thông tin thì không cần load lại trang)
+b2: Tạo 1 ArrowFunction "submitForm" trong file "Contact.js" 
+
+```
+constructor(props) {
+        super(props);
+        this.state = {
+            isRedirect : false
+        }
+    }
+    
+    submitForm = (event) => {
+        event.preventDefault();
+        this.setState({
+            isRedirect: true
+        });
+       
+
+```
+- " event.preventDefault();" hàm này có nghĩa là : ngăn chặn các thao tác mặc định
+- vd: thao tác của form là submit sau đó chuyển sang trang khác, như vậy nếu sử dụng hàm này nó sẽ không submit nữa 
+
+- import thư viện : 
+```
+import Redirect from 'react-router-dom/Redirect';
+```
+- Sau render thêm"
+```
+if (this.state.isRedirect) {
+            return <Redirect to="/" />;
+        }
+```
+---> nếu trạng thái đúng nó sẽ chuyển sang trang "Home"
+
+- Trong Form submit cần gọi đến hàm "submitForm" để khi click vào button submit nó sẽ chuyển sang trang khác
+
+```
+<div className="form-group">
+                                <button type="submit" onClick={(event) => this.submitForm(event)} className="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+                            </div>
+```
+
+ 
+
+ **Unit_46:  Cách nhận dữ liệu dưới dạng mảng trong React JS form**
+
+- Khi insert vào form và ấn nút send thì nó sẽ tự động gửi dữ liệu qua cho mình
+---> xử lý bằng multiple input 
+- https://reactjs.org/docs/forms.html
+- sử dụng mảng " [name]: value
+```
+this.setState({
+      [name]: value
+    });
+```
+---> tự động mảng này nó sẽ nhận biết được có những trường nào để đặt vào state 
+
+- Tạo 1 hàm khi nó thay đổi giá trị:
+```
+isChange = (event) => {
+        const ten = event.target.name;
+        const giatri = event.target.value;
+        this.setState({
+            [ten]: giatri
+        });
+        
+    }
+```
+- Để lấy ra nội dung của các trường ---> tạo ra 1 function getGiaTri
+```
+getGiaTri = () => {
+        var noiDung = "";
+        noiDung += "Ten nhan duoc la: " + this.state.fName;
+        noiDung += "/ Email nhan duoc la: " + this.state.fEmail;
+        noiDung += "/ Phone nhan duoc la: " + this.state.fPhone;
+        noiDung += "/ Message nhan duoc la: " + this.state.fMess;
+        return noiDung;
+    }
+```
+---> chuyển dữ liệu vào trong state khi lấy ra thì gọi nó ra ví dụ = "this.state.fName"
+
+- Gọi ra giá trị trong hàm render
+```
+ if (this.state.isRedirect) {
+            console.log(this.getGiaTri());
+            return <Redirect to="/" />;
+        }
+```
+- Ngoài ra cần thêm vào các thuộc tính "input"
+```
+vd: 
+<input onChange={(event) => this.isChange(event)} name="fName" ... />
+```
