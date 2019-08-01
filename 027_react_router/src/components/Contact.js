@@ -5,7 +5,7 @@ class Contact extends Component {
         super(props);
         this.state = {
             isRedirect : false,
-          
+            fDate: "thursday",
         }
     }
     isChange = (event) => {
@@ -15,6 +15,14 @@ class Contact extends Component {
             [ten]: giatri
         });
         
+    }
+    isFileChange = (event) => {
+        const imagename = event.target.files[0].name;  // muon truy nhap toan bo phan tu cua file Image -> su dung files[0], muon in ra ten image ->  files[0].name ===> key is files, muốn lấy thông số gì thì  files[0]. cái đó 8-) 
+        // const fImage2 = event.target.files[0].size ; 
+        // Sau khi có được Image sẽ import đẩy vào trường dữ liệu của mình
+        this.setState({
+            fImage:  imagename
+        });
     }
     submitForm = (event) => {
         event.preventDefault();
@@ -30,6 +38,8 @@ class Contact extends Component {
         noiDung += "/ Email nhan duoc la: " + this.state.fEmail;
         noiDung += "/ Phone nhan duoc la: " + this.state.fPhone;
         noiDung += "/ Message nhan duoc la: " + this.state.fMess;
+        noiDung += "/ Ngay nhan duoc la:" + this.state.fDate;
+        noiDung += "/ Image nhan duoc la:" + this.state.fImage;
         return noiDung;
     }
     render() {
@@ -99,6 +109,35 @@ class Contact extends Component {
                                 </div>
                             </div>
                             <br />
+
+                            <div className="control-group">
+                                <div className="form-group floating-label-form-group controls mb-0 pb-2">
+                                <label>Choose Date</label>
+                               
+                                  <select value={this.state.fDate} class="form-control" 
+                                   onChange={(event) => this.isChange(event)}  >
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                  </select>
+                                <p className="help-block text-danger" />
+                                </div>
+                            </div>
+                            <br />
+
+
+                            <div className="control-group">
+                                <div className="form-group floating-label-form-group controls mb-0 pb-2">
+                                
+                               
+                                          <input onChange={(event) => this.isFileChange(event)} type="file" className="form-control-file" name="fImage" />
+                                      
+                                <p className="help-block text-danger" />
+                                </div>
+                            </div>
+                            <br />
+
                             <div id="success" />
                             <div className="form-group">
                                 <button type="submit" onClick={(event) => this.submitForm(event)} className="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
