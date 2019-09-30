@@ -1,0 +1,43 @@
+html, body{
+  font-family: -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 100%;
+  color: #222;
+}
+
+.app-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+
+  >.buttons{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    >button{
+      margin: 5px;
+    }
+  }
+
+  >.list{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    color: #0c5460;
+
+    >.list-item{
+      padding: 10px 15px;
+      color: #0b2e13;
+      background-image: linear-gradient(to right,#e0f7fa,#b2ebf2, #80deea, #84ffff, #18ffff,#29b6f6,#03a9f4, #00b0ff, #0091ea);
+      &:not(:first-child){
+        border-top: 1px solid #ddd;
+
+      }
+    }
+  }
+}
